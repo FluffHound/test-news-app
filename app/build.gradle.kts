@@ -1,14 +1,17 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
-    namespace = "com.mhanifs.newsapp"
+    namespace = "com.fatih.newsapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.mhanifs.newsapp"
+        applicationId = "com.fatih.newsapp"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -23,10 +26,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
@@ -51,6 +51,32 @@ android {
 
 dependencies {
 
+    // Retrofit dependency
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    // OkHttp dependency
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+
+    // Paging dependency
+    implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.androidx.paging.compose)
+
+    //Coil dependency - Cached Image Network
+    implementation(libs.coil.compose)
+
+    // Hilt dependency
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    kapt(libs.hilt.android.compiler)
+
+
+    // Arrow.kt dependency
+    implementation("io.arrow-kt:arrow-core:1.2.1")
+    implementation("io.arrow-kt:arrow-fx-coroutines:1.2.1")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -59,20 +85,6 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.retrofit)
-    implementation(libs.gson)
-    implementation(libs.okhttp)
-    implementation(libs.converter.gson)
-    implementation(libs.logging.interceptor)
-    implementation(libs.androidx.paging.runtime)
-    implementation(libs.androidx.paging.compose)
-    implementation(libs.coil.compose)
-    implementation(libs.com.google.dagger.hilt.android.gradle.plugin)
-    implementation(libs.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.arrow.core)
-    implementation(libs.arrow.fx.coroutines)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

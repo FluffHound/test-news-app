@@ -19,6 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "News App"
+rootProject.name = "Clean Architecture News Apps"
 include(":app")
- 
